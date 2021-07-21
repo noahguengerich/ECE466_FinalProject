@@ -8,9 +8,12 @@ void dh_hw::process_hw()
   NN_DIGIT t[2], c, u, v;
   NN_HALF_DIGIT aHigh, cLow, cHigh;
   
-  for (;;) {  
+  while(1) {  
   
-	    // Read inputs (blocking FIFO access)
+      // Wait for hw_enable
+      while(hw_enable.read() == false) wait(clock.posedge_event());
+
+	    // Read inputs
 	    t[0] = from_sw0.read();
 	    t[1] = from_sw1.read();
       c = from_sw2.read();
@@ -40,11 +43,15 @@ void dh_hw::process_hw()
       }
       /*** End: Bonus part ***/
 		
-      // Write outputs (blocking FIFO access)
+      // Write outputs
       to_sw0.write(t[0]);
       to_sw1.write(t[1]);
 	    to_sw2.write(aHigh);
 
+      // Finish handshaking
+      hw_done.write(true);
+      while(hw_enable.read() == true) wait(clock.posedge_event());
+      hw_done.write(false);
   }
 	  	  
 }

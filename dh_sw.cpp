@@ -453,13 +453,17 @@ void dh_sw::NN_DigitDivHH(
     to_hw2.write(c);
     to_hw3.write(aHigh);
 
-    // This computation is now performed in hardware.
-    /* Synchronization is done via blocking read/write 
-   (to be replaced by handshaking). */
-
+    // Perform handshaking
+    hw_enable.write(true);
+    wait(); // wait for hw_done == true
+    
     t[0] = from_hw0.read();
     t[1] = from_hw1.read();
     aHigh = from_hw2.read();
+
+    // Finish transaction
+    hw_enable.write(false);  
+    wait(); // wait for hw_done == false
 }
 
 /*** This function computes reference values for verification ***/
@@ -1509,7 +1513,6 @@ void dh_sw::InitRandomStruct(
 
 void dh_sw::process_sw()
 {
-
     R_DH_PARAMS PARAMS1, PARAMS2;
 
     unsigned char PRIME2[DH_PRIME_LEN(KEY_LENGTH)];

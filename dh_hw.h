@@ -6,11 +6,13 @@
 
 SC_MODULE (dh_hw)
 {
-  sc_fifo_in <NN_DIGIT> from_sw0, from_sw1, from_sw2;
-  sc_fifo_in <NN_HALF_DIGIT> from_sw3;
+  sc_in <NN_DIGIT> from_sw0, from_sw1, from_sw2;
+  sc_in <NN_HALF_DIGIT> from_sw3;
 
-  sc_fifo_out <NN_DIGIT> to_sw0, to_sw1;
-  sc_fifo_out <NN_HALF_DIGIT> to_sw2;
+  sc_out <NN_DIGIT> to_sw0, to_sw1;
+  sc_out <NN_HALF_DIGIT> to_sw2;
+
+  sc_in_clk clock;
   
   sc_in <bool> hw_enable; 
   sc_out <bool> hw_done;
@@ -19,7 +21,7 @@ SC_MODULE (dh_hw)
   
   SC_CTOR (dh_hw)
   {
-    SC_THREAD (process_hw);
+    SC_THREAD(process_hw);
   }
   
 };
