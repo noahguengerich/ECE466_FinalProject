@@ -1,10 +1,9 @@
 #include "systemc.h"
 #include "multiplier.h"
 
-
-// constructor
 SC_HAS_PROCESS(multiplier);
 
+// constructor
 multiplier::multiplier(sc_module_name name) : sc_module(name)
 {
     SC_METHOD(multiplierProcess);
