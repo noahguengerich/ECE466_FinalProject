@@ -13,7 +13,7 @@ SC_MODULE(fsm_controller)
     sc_out <bool> latch_output;
 
     // primitives
-    enum fsmState {RESET, IDLE, INPUT, BONUS, OUTPUT, FINISH};
+    enum fsmState {RESET, IDLE, INPUT, PROCESS, OUTPUT, FINISH};
     fsmState state;
 
     // constructor
