@@ -13,5 +13,5 @@ mux::mux(sc_module_name name) : sc_module(name)
 
 void mux::muxProcess()
 {
-    out->write(select ? in1 : in2);
+    out.write(select ? in1 : in2);
 }
