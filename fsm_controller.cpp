@@ -56,7 +56,7 @@ void fsm_controller::fsmProcess()
                 }
                 break;
 
-            case default:
+            default:
                 printf("Error - default FSM state reached\n");
                 sc_stop();
         }

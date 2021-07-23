@@ -6,12 +6,12 @@
 #include "reg.h"
 #include "fsm_controller.h"
 #include "bonus_module.h"
-#include "comparator.h"
 #include "multiplier.h"
 #include "mux.h"
 #include "shifter.h"
 #include "splitter.h"
 #include "subtractor.h"
+#include "comparator.h"
 
 SC_MODULE(dh_hw)
 {
@@ -29,18 +29,18 @@ SC_MODULE(dh_hw)
     fsm_controller FSM;
     bonus_module bonus;
 
-    reg reg0;
-    reg reg1;
-    reg reg2;
-    reg reg3;
-    reg reg4;
-    reg reg5;
-    reg reg6;
+    reg<NN_DIGIT> reg0;
+    reg<NN_DIGIT> reg1;
+    reg<NN_DIGIT> reg2;
+    reg<NN_HALF_DIGIT> reg3;
+    reg<NN_DIGIT> reg4;
+    reg<NN_DIGIT> reg5;
+    reg<NN_HALF_DIGIT> reg6;
 
     splitter split0;
 
-    multiplier multi0;
-    multiplier multi1;
+    multiplier<NN_HALF_DIGIT> multi0;
+    multiplier<NN_HALF_DIGIT> multi1;
 
     shifter shift0;
     shifter shift1;
@@ -54,7 +54,7 @@ SC_MODULE(dh_hw)
     comparator comp0;
 
     // SystemC Signals
-    // Signals are named by their driving source (e.g. shift1 is driven by shifter 1)
+    // Signals are named by their driving source
     sc_signal <NN_DIGIT> t0;
     sc_signal <NN_DIGIT> t1;
     sc_signal <NN_DIGIT> c;
@@ -66,27 +66,27 @@ SC_MODULE(dh_hw)
     sc_signal <NN_DIGIT> u;
     sc_signal <NN_DIGIT> v;
 
-    sc_signal <NN_DIGIT> shift0;
-    sc_signal <NN_DIGIT> shift1;
+    sc_signal <NN_DIGIT> shift0_out;
+    sc_signal <NN_DIGIT> shift1_out;
 
-    sc_signal <NN_DIGIT> sub0;
-    sc_signal <NN_DIGIT> sub1;
-    sc_signal <NN_DIGIT> sub2;
-    sc_signal <NN_DIGIT> sub3;
-    sc_signal <NN_DIGIT> sub4;
+    sc_signal <NN_DIGIT> sub0_out;
+    sc_signal <NN_DIGIT> sub1_out;
+    sc_signal <NN_DIGIT> sub2_out;
+    sc_signal <NN_DIGIT> sub3_out;
+    sc_signal <NN_DIGIT> sub4_out;
 
-    sc_signal <NN_DIGIT> comp0;
+    sc_signal <NN_DIGIT> comp0_out;
 
     sc_signal <NN_DIGIT> t0_out;
     sc_signal <NN_DIGIT> t1_out;
-    sc_signal <NN_DIGIT> aHigh_out;
+    sc_signal <NN_HALF_DIGIT> aHigh_out;
 
     sc_signal <bool> latch_input;
     sc_signal <bool> latch_output;
     sc_signal <bool> bonus_enable;
 
-    sc_signal<NN_DIGIT> shift0_val;
-    sc_signal<NN_DIGIT> shift1_val;
+    sc_signal<int> shift0_val;
+    sc_signal<int> shift1_val;
     sc_signal<NN_DIGIT> sub1_val;
 
     // constructor

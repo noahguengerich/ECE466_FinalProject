@@ -13,6 +13,6 @@ shifter::shifter(sc_module_name name) : sc_module(name)
 
 void shifter::shifterProcess()
 {
-    shiftVal = shift.read();
+    int shiftVal = shift.read();
     out->write(shiftVal > 0 ? in.read() >> shiftVal : in.read() << shiftVal);
 }

@@ -5,9 +5,9 @@
 SC_MODULE(splitter)
 {
     // ports
-    sc_in<float> in;
+    sc_in<NN_DIGIT> in;
 
-    sc_out<float> outHigh, outLow;
+    sc_out<NN_HALF_DIGIT> outHigh, outLow;
 
     // constructor
     splitter(sc_module_name name);

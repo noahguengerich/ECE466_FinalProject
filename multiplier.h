@@ -1,16 +1,23 @@
 #include "systemc.h"
+#include "digit.h"
 
 // Define SC module
-SC_MODULE(multiplier)
+template<class T> SC_MODULE(multiplier)
 {
     // ports
-    sc_in<float> in1, in2;
+    sc_in<T> in1, in2;
 
-    sc_out<float> out;
+    sc_out<NN_DIGIT> out;
 
     // constructor
-    multiplier(sc_module_name n);
+    SC_CTOR(multiplier)
+    {
+        SC_METHOD(multiplierProcess);
+        sensitive << in1 << in2;
+    }
 
-    // prototype
-    void multiplierProcess();
+    void multiplierProcess()
+    {
+        out->write(in1->read() * in2->read());
+    }
 };
