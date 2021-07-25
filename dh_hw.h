@@ -7,7 +7,6 @@
 #include "fsm_controller.h"
 #include "bonus_module.h"
 #include "multiplier.h"
-#include "mux.h"
 #include "shifter.h"
 #include "splitter.h"
 #include "subtractor.h"
